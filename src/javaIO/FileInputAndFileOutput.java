@@ -2,7 +2,6 @@ package javaIO;
 
 import java.io.*;
 import java.util.Date;
-import java.util.Random;
 
 /**
  * @author YueHao <YueHao, yuehao@caimao.com>
@@ -12,21 +11,29 @@ import java.util.Random;
  * @date 2016/7/1
  * @time 22:38
  * @修改记录 <pre>
- * 输入流
  * --------------------------------------------------
- * <p/>
+ * FileInputStream与FileInputStream关系与用法
  * --------------------------------------------------
  * </pre>
  */
-public class Day_01 {
+public class FileInputAndFileOutput {
+    /**
+     * txt文件 *
+     */
+    private static final String PATH_URL = "C:\\yuehao\\demo\\01.txt";
+    /**
+     * 图片文件 *
+     */
+    private static final String IMG_URL = "C:\\yuehao\\demo\\Ol8H3P.jpg";
+    /**
+     * 文件夹目录 *
+     */
+    private static final String TARGET_URL = "C:\\yuehao\\demo\\";
 
-    public static void main(String[] args) {
-        String pathURL = "C:\\yuehao\\demo\\01.txt";
-        String imgURL = "C:\\yuehao\\demo\\Ol8H3P.jpg";
-        String targetURL = "C:\\yuehao\\demo\\";
-//        String content = getFileContent(pathURL);
-        getImgContent(imgURL, targetURL);
-    }
+    //java io 流分为字符流与字节流
+    //字符流只能读取字符内容
+    //字节流可以读取一切
+    //FileInputStream＆FileOutputSteam属于字节流
 
     /**
      * 读取源路径图片，生成目标路径图片
@@ -35,11 +42,16 @@ public class Day_01 {
      * @param targetURL 目标目录
      */
     private static void getImgContent(String pathURL, String targetURL) {
+        //源文件地址
         File file = new File(pathURL);
+        //目标文件地址
         File toFile = new File(targetURL);
         try {
+            //从源文件地址读取
             InputStream inputStream = new FileInputStream(file);
+            //写出到目标文件
             OutputStream outputStream = new FileOutputStream(toFile + "\\" + String.valueOf(new Date().getTime()) + ".jpg");
+            //建立一个字节数组
             byte[] bytes = new byte[1024];
             int len = 0;
             try {
